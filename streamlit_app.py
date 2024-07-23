@@ -48,7 +48,8 @@ st.write(
 
 question = st.text_area("Enter you question:")
 if st.button("Ask"):
-    query=f"Set @query='{question}';  SET @options = JSON_Object('vector_store',JSON_ARRAY('vectordb.demo_embedding'));call sys.ML_RAG(@query,@output,@options);select JSON_PRETTY(@output);"
+    query=f"SET @query='{question}';  SET @options = JSON_Object('vector_store',JSON_ARRAY('vectordb.demo_embedding'));call sys.ML_RAG(@query,@output,@options);SELECT JSON_UNQUOTE(JSON_EXTRACT(@output, '$.text'));"
+    # query=f"set @query='test';set @options = JSON_OBJECT('vector_store', JSON_ARRAY('vectordb.demo_embeddings'));call sys.ML_RAG(@query,@output,@option);select JSON_PRETTY(@output);"
     answer = sql_rest_query(query, resp_format='json')
     # answer = sql_rest_query('show tables in vectordb')
     # q1="set @options = JSON_OBJECT('vector_store', JSON_ARRAY('vectordb.demo_embeddings'));"
