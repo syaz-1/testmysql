@@ -17,33 +17,33 @@ conn=st.connection('mysql',type='sql')
 # pass_phrase=config['pass_phrase']
 # )
 
-endpoint='https://sql.dbtools.us-chicago-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.us-chicago-1.amaaaaaaxc7u3kianrg7kpoftbqvafpy5eghxszddftbnwbao2ze5x6hemiq/_/sql'
-headers={'Content-Type': 'application/sql'}
+# endpoint='https://sql.dbtools.us-chicago-1.oci.oraclecloud.com/20201005/ords/ocid1.databasetoolsconnection.oc1.us-chicago-1.amaaaaaaxc7u3kianrg7kpoftbqvafpy5eghxszddftbnwbao2ze5x6hemiq/_/sql'
+# headers={'Content-Type': 'application/sql'}
 
-def sql_rest_query(data, resp_format='table'):
-    response = requests.post(endpoint, data=data, headers=headers, auth=auth)
-    if response.status_code == 200:
-        if resp_format == 'table':
-            columnName = response.json()['items'][0]['resultSet']['metadata'][0]['jsonColumnName']
-            columnValues = response.json()['items'][0]['resultSet']['items']
-            resp_df = pd.DataFrame(data=columnValues)
-        elif resp_format == 'raw':
-            resp_df = response.text
-        else:
-            resp_df = response.json()['items'][0]['response']
-    else:
-        resp_df = response.json()
-    return resp_df
+# def sql_rest_query(data, resp_format='table'):
+#     response = requests.post(endpoint, data=data, headers=headers, auth=auth)
+#     if response.status_code == 200:
+#         if resp_format == 'table':
+#             columnName = response.json()['items'][0]['resultSet']['metadata'][0]['jsonColumnName']
+#             columnValues = response.json()['items'][0]['resultSet']['items']
+#             resp_df = pd.DataFrame(data=columnValues)
+#         elif resp_format == 'raw':
+#             resp_df = response.text
+#         else:
+#             resp_df = response.json()['items'][0]['response']
+#     else:
+#         resp_df = response.json()
+#     return resp_df
 
 
-data='show databases'
-ml_model="call sys.ML_MODEL_LOAD('mistral-7b-instruct-v1', NULL);"
-ml = requests.post(endpoint, data=ml_model, headers=headers, auth=auth)
-response = requests.post(endpoint, data=data, headers=headers, auth=auth)
-print(ml)
-print(ml.text)
-print(response)
-print(response.text)
+# data='show databases'
+# ml_model="call sys.ML_MODEL_LOAD('mistral-7b-instruct-v1', NULL);"
+# ml = requests.post(endpoint, data=ml_model, headers=headers, auth=auth)
+# response = requests.post(endpoint, data=data, headers=headers, auth=auth)
+# print(ml)
+# print(ml.text)
+# print(response)
+# print(response.text)
 
 st.title("🎈 MySQL GEN ai Test")
 st.write(
