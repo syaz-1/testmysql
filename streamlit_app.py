@@ -55,7 +55,7 @@ if st.button("Ask"):
     q=f"call sys.heatwave_chat('{question}')"
     qtest="call sys.heatwave_chat('what is heatwave auto ml')"
     # query=f"SET @query ='{question}';  SET @options = JSON_Object('vector_store',JSON_ARRAY('vectordb.demo_embedding'));call sys.ML_RAG(@query,@output,@options);SELECT JSON_UNQUOTE(JSON_EXTRACT(@output, '$.text')) as output;"
-    query=f"set @query='test';set @options = JSON_OBJECT('vector_store', JSON_ARRAY('vectordb.demo_embeddings'));call sys.ML_RAG(@query,@output,@option);"
+    query=f"set @query='{question}';set @options = JSON_OBJECT('vector_store', JSON_ARRAY('vectordb.demo_embeddings'));call sys.ML_RAG(@query,@output,@option);"
     # answer = sql_rest_query(query, resp_format='json')
     # answer = sql_rest_query('show tables in vectordb')
     # answer = sql_rest_query(query,resp_format='table')
